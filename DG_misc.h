@@ -155,9 +155,7 @@ DG_MISC_DEF size_t DG_strlen(const char* s);
 
 // several different cases to do printf format checking with different compilers for DG_snprintf()
 #if defined(_MSC_VER) && _MSC_VER >= 1400 // MSVC2005 and newer have an annotation. only used in /analyze builds.
-	#include <CodeAnalysis\SourceAnnotations.h>
-	DG_MISC_DEF int DG_snprintf(char *dst, size_t size,
-	             [SA_FormatString(Style="printf")] const char *format, ...);
+	DG_MISC_DEF int DG_snprintf(char *dst, size_t size, const char *format, ...);
 #elif defined(__GNUC__) // mingw or similar, checking with GCC attribute
 	DG_MISC_DEF int DG_snprintf(char *dst, size_t size,
 	             const char *format, ...) __attribute__ ((format (printf, 3, 4)));
